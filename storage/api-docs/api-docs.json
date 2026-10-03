@@ -18,7 +18,7 @@
                     "Products"
                 ],
                 "summary": "Get all products",
-                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "operationId": "56e55c22eca63e7fea3119a8b0c7cfdf",
                 "responses": {
                     "200": {
                         "description": "List of products",
@@ -42,17 +42,16 @@
                     "Products"
                 ],
                 "summary": "Get product by slug",
-                "operationId": "5bbb6d725346d38781b256ed5c715d62",
+                "operationId": "e96b46af6c1d0794a7dde30b12cb3909",
                 "parameters": [
                     {
                         "name": "slug",
                         "in": "path",
-                        "description": "Product Slug",
                         "required": true,
                         "schema": {
                             "type": "string"
                         },
-                        "example": "paralen-500"
+                        "example": "testovaci-vyzivovy-doplnok"
                     }
                 ],
                 "responses": {
@@ -61,65 +60,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 2
-                                        },
-                                        "product_code": {
-                                            "type": "string",
-                                            "example": "VIT-000002"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Testovací výživový doplnok"
-                                        },
-                                        "slug": {
-                                            "type": "string",
-                                            "example": "testovaci-vyzivovy-doplnok"
-                                        },
-                                        "ean": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "sukl_code": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "product_type": {
-                                            "type": "string",
-                                            "example": "food_supplement"
-                                        },
-                                        "price": {
-                                            "type": "string",
-                                            "example": "12.50"
-                                        },
-                                        "is_active": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "composition": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "dosage": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "usage": {
-                                            "type": "string",
-                                            "nullable": true
-                                        },
-                                        "warnings": {
-                                            "type": "string",
-                                            "nullable": true
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Product"
                                 }
                             }
                         }
@@ -147,42 +88,39 @@
     "components": {
         "schemas": {
             "Product": {
-                "title": "Product",
-                "description": "Vitalis Shop Product",
                 "properties": {
                     "id": {
                         "type": "integer",
-                        "example": 1
+                        "example": 2
                     },
                     "product_code": {
                         "type": "string",
-                        "example": "VIT-001"
+                        "example": "VIT-000002"
                     },
                     "name": {
                         "type": "string",
-                        "example": "Paralen 500"
+                        "example": "Testovací výživový doplnok"
                     },
                     "slug": {
                         "type": "string",
-                        "example": "paralen-500"
+                        "example": "testovaci-vyzivovy-doplnok"
                     },
                     "ean": {
                         "type": "string",
-                        "example": "8584005010012",
+                        "example": "8580000000002",
                         "nullable": true
                     },
                     "sukl_code": {
                         "type": "string",
-                        "example": "12345",
                         "nullable": true
                     },
                     "product_type": {
                         "type": "string",
-                        "example": "MEDICINE"
+                        "example": "food_supplement"
                     },
                     "price": {
                         "type": "string",
-                        "example": "4.99"
+                        "example": "12.50"
                     },
                     "is_active": {
                         "type": "boolean",
@@ -190,27 +128,22 @@
                     },
                     "description": {
                         "type": "string",
-                        "example": "Product description",
                         "nullable": true
                     },
                     "composition": {
                         "type": "string",
-                        "example": "Product composition",
                         "nullable": true
                     },
                     "dosage": {
                         "type": "string",
-                        "example": "Product dosage",
                         "nullable": true
                     },
                     "usage": {
                         "type": "string",
-                        "example": "Product usage",
                         "nullable": true
                     },
                     "warnings": {
                         "type": "string",
-                        "example": "Product warnings",
                         "nullable": true
                     }
                 },
