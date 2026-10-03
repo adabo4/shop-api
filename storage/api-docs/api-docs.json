@@ -35,6 +35,113 @@
                     }
                 }
             }
+        },
+        "/api/products/{slug}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product by slug",
+                "operationId": "5bbb6d725346d38781b256ed5c715d62",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Product Slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "paralen-500"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 2
+                                        },
+                                        "product_code": {
+                                            "type": "string",
+                                            "example": "VIT-000002"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Testovací výživový doplnok"
+                                        },
+                                        "slug": {
+                                            "type": "string",
+                                            "example": "testovaci-vyzivovy-doplnok"
+                                        },
+                                        "ean": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "sukl_code": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "product_type": {
+                                            "type": "string",
+                                            "example": "food_supplement"
+                                        },
+                                        "price": {
+                                            "type": "string",
+                                            "example": "12.50"
+                                        },
+                                        "is_active": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "composition": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "dosage": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "usage": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "warnings": {
+                                            "type": "string",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
