@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ProductType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -30,5 +31,10 @@ class Product extends Model
             'price' =>  'decimal:2',
             'is_active' => 'boolean',
         ];
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
     }
 }
