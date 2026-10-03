@@ -1,0 +1,120 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Vitalis Shop API",
+        "description": "REST API for Vitalis Shop",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products",
+                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "responses": {
+                    "200": {
+                        "description": "List of products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "title": "Product",
+                "description": "Vitalis Shop Product",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "example": "VIT-001"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Paralen 500"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "paralen-500"
+                    },
+                    "ean": {
+                        "type": "string",
+                        "example": "8584005010012",
+                        "nullable": true
+                    },
+                    "sukl_code": {
+                        "type": "string",
+                        "example": "12345",
+                        "nullable": true
+                    },
+                    "product_type": {
+                        "type": "string",
+                        "example": "MEDICINE"
+                    },
+                    "price": {
+                        "type": "string",
+                        "example": "4.99"
+                    },
+                    "is_active": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Product description",
+                        "nullable": true
+                    },
+                    "composition": {
+                        "type": "string",
+                        "example": "Product composition",
+                        "nullable": true
+                    },
+                    "dosage": {
+                        "type": "string",
+                        "example": "Product dosage",
+                        "nullable": true
+                    },
+                    "usage": {
+                        "type": "string",
+                        "example": "Product usage",
+                        "nullable": true
+                    },
+                    "warnings": {
+                        "type": "string",
+                        "example": "Product warnings",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Products"
+        }
+    ]
+}
