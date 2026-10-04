@@ -10,7 +10,6 @@ use OpenApi\Attributes as OA;
     required: [
         'product_code',
         'name',
-        'slug',
         'product_type',
     ],
     properties: [
@@ -23,11 +22,6 @@ use OpenApi\Attributes as OA;
             property: 'name',
             type: 'string',
             example: 'Paralen 500'
-        ),
-        new OA\Property(
-            property: 'slug',
-            type: 'string',
-            example: 'paralen-500'
         ),
         new OA\Property(
             property: 'ean',

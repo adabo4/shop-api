@@ -4,6 +4,8 @@ namespace App\OpenApi\Schemas;
 
 use OpenApi\Attributes as OA;
 
+/*Swagger response schema v odpovede v docs */
+
 #[OA\Schema(
     schema: 'Product',
     type: 'object',

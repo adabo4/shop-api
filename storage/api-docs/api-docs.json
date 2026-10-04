@@ -170,7 +170,6 @@
                 "required": [
                     "product_code",
                     "name",
-                    "slug",
                     "product_type"
                 ],
                 "properties": {
@@ -181,10 +180,6 @@
                     "name": {
                         "type": "string",
                         "example": "Paralen 500"
-                    },
-                    "slug": {
-                        "type": "string",
-                        "example": "paralen-500"
                     },
                     "ean": {
                         "type": "string",

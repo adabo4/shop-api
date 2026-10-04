@@ -7,15 +7,14 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 
 class ProductController extends Controller
 {
     public function index(): JsonResponse
     {
-        $products = Product::query()
-            ->where('is_active', true)
-            ->get();
+        $products = Product::all();
 
         return response()->json($products);
     }
@@ -36,16 +35,26 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    /* POST REQUEST */
+
     public function store(StoreProductRequest $request): JsonResponse
     {
-        $product = Product::create($request->validated());
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+        $product = Product::create($data);
 
         return response()->json($product, 201);
     }
 
     public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
-        $product->update($request->validated());
+        $data = $request->validated();
+
+        if (isset($data['name'])) {
+            $data['slug'] = Str::slug($data['name']);
+        }
+
+        $product->update($data);
         return response()->json($product);
     }
 }
