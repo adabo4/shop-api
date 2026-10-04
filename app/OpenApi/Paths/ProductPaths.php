@@ -4,6 +4,8 @@ namespace App\OpenApi\Paths;
 
 use OpenApi\Attributes as OA;
 
+use function Laravel\Prompts\form;
+
 #[OA\Get(
     path: '/api/products',
     summary: 'Get all products',
@@ -56,5 +58,33 @@ use OpenApi\Attributes as OA;
             )
         ),
     ]
+)]
+
+#[OA\Post(
+    path: '/api/products',
+    summary: 'Create product',
+    tags: ['Products'],
+
+    requestBody: new OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            ref: '#/components/schemas/CreateProductRequest'
+        )
+    ),
+    responses: [
+        new OA\Response(
+            response: 201,
+            description: 'Product created successfully',
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/Product'
+            )
+        ),
+
+        new OA\Response(
+            response: 422,
+            description: 'Validation error'
+        ),
+    ]
+
 )]
 class ProductPaths {}
