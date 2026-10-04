@@ -68,6 +68,55 @@
                 }
             }
         },
+        "/api/categories/{category}": {
+            "patch": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update a category",
+                "operationId": "ce911651e12db7e87c4064091eeb9ccb",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCategoryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
@@ -305,6 +354,21 @@
                     "parent_id": {
                         "type": "integer",
                         "example": null,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCategoryRequest": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Bolesť a horúčka",
+                        "maxLength": 255
+                    },
+                    "parent_id": {
+                        "type": "integer",
+                        "example": 1,
                         "nullable": true
                     }
                 },

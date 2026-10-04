@@ -49,5 +49,47 @@ class CategoryPaths
             )
         ]
     )]
+
+    #[OA\Patch(
+        path: '/api/categories/{category}',
+        summary: 'Update a category',
+        tags: ['Categories'],
+        parameters: [
+            new OA\Parameter(
+                name: 'category',
+                in: 'path',
+                required: true,
+                description: 'Category ID',
+                schema: new OA\Schema(
+                    type: 'integer',
+                    example: 2
+                )
+            )
+        ],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/UpdateCategoryRequest'
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Category updated successfully',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/Category'
+                )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Category not found'
+            ),
+            new OA\Response(
+                response: 422,
+                description: 'Validation error'
+            )
+        ]
+    )]
+
     public function store(): void {}
 }
