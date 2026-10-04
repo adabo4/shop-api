@@ -39,12 +39,15 @@ class Product extends Model
     protected static function booted(): void
     {
         static::creating(function (Product $product) {
-            $product->slug = Str::slug($product->name);
+            $product->slug = static::generateUniqueSlug($product->name);
         });
 
         static::updating(function (Product $product) {
             if ($product->isDirty('name')) {
-                $product->slug = Str::slug($product->name);
+                $product->slug = static::generateUniqueSlug(
+                    $product->name,
+                    $product->id
+                );
             }
         });
 
@@ -58,5 +61,29 @@ class Product extends Model
 
             $product->saveQuietly();
         });
+    }
+
+    private static function generateUniqueSlug(
+        string $name,
+        ?int $ignoreProductId = null
+    ): string {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (
+            static::query()
+            ->where('slug', $slug)
+            ->when(
+                $ignoreProductId,
+                fn($query) => $query->where('id', '!=', $ignoreProductId)
+            )
+            ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 }
