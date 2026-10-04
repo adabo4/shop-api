@@ -123,4 +123,35 @@ use OpenApi\Attributes as OA;
     ]
 )]
 
+#[OA\Delete(
+    path: '/api/products/{product}',
+    summary: 'Delete product',
+    tags: ['Products'],
+    parameters: [
+        new OA\Parameter(
+            name: 'product',
+            in: 'path',
+            required: true,
+            description: 'Product ID',
+            schema: new OA\Schema(
+                type: 'integer',
+                example: 6
+            )
+        ),
+    ],
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'Product deleted successfully',
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/DestroyProductResponse'
+            )
+        ),
+        new OA\Response(
+            response: 404,
+            description: 'Product not found'
+        ),
+    ]
+)]
+
 class ProductPaths {}
