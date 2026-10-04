@@ -15,7 +15,6 @@ class Product extends Model
         'ean',
         'sukl_code',
         'product_type',
-        'price',
         'is_active',
         'description',
         'composition',
@@ -28,7 +27,6 @@ class Product extends Model
     {
         return [
             'product_type' => ProductType::class,
-            'price' =>  'decimal:2',
             'is_active' => 'boolean',
         ];
     }

@@ -48,12 +48,6 @@ use OpenApi\Attributes as OA;
             example: 'human_medicine'
         ),
         new OA\Property(
-            property: 'price',
-            type: 'number',
-            format: 'decimal',
-            example: 8.90
-        ),
-        new OA\Property(
             property: 'is_active',
             type: 'boolean',
             example: true

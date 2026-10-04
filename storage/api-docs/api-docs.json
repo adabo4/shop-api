@@ -124,8 +124,7 @@
                     "product_code",
                     "name",
                     "slug",
-                    "product_type",
-                    "price"
+                    "product_type"
                 ],
                 "properties": {
                     "product_code": {
@@ -157,11 +156,6 @@
                             "human_medicine",
                             "food_supplement"
                         ]
-                    },
-                    "price": {
-                        "type": "number",
-                        "format": "decimal",
-                        "example": 8.9
                     },
                     "is_active": {
                         "type": "boolean",
@@ -220,10 +214,6 @@
                     "product_type": {
                         "type": "string",
                         "example": "food_supplement"
-                    },
-                    "price": {
-                        "type": "string",
-                        "example": "12.50"
                     },
                     "is_active": {
                         "type": "boolean",

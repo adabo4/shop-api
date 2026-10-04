@@ -26,12 +26,11 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'product_code' => ['required', 'string', 'max:50', 'unique:products,product_code    '],
+            'product_code' => ['required', 'string', 'max:50', 'unique:products,product_code'],
             'slug' => ['required', 'string', 'max:255', 'unique:products,slug'],
             'ean' => ['nullable', 'string', 'max:20', 'unique:products,ean'],
             'sukl_code' => ['nullable', 'string', 'max:50'],
             'product_type' => ['required', Rule::enum(ProductType::class)],
-            'price' => ['nullable', 'numeric', 'min:0'],
             'is_active' => ['boolean'],
             'description' => ['nullable', 'string'],
             'composition' => ['nullable', 'string'],
