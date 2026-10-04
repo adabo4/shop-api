@@ -10,3 +10,14 @@ Route::post('products', [ProductController::class, 'store']);
 Route::patch('products/{product}', [ProductController::class, 'update']);
 
 Route::delete('products/{product}', [ProductController::class, 'destroy']);
+
+/* CATEGORY */
+
+use App\Http\Controllers\Api\CategoryController;
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{slug}', [CategoryController::class, 'show']);
+
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::patch('/categories/{category}', [CategoryController::class, 'update']);
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
