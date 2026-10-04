@@ -1,6 +1,6 @@
 <?php
 
-namespace App\OpenApi\Schemas;
+namespace App\OpenApi\Schemas\Product;
 
 use OpenApi\Attributes as OA;
 

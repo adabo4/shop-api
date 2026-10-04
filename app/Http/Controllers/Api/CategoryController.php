@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
-use Dom\ChildNode;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -17,15 +17,17 @@ class CategoryController extends Controller
     {
         $categories = Category::with('children')->whereNull('parent_id')->get();
 
-        return response()->json([$categories]);
+        return response()->json($categories);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request): JsonResponse
     {
-        //
+        $category = Category::create($request->validated());
+
+        return response()->json($category, 201);
     }
 
     /**
