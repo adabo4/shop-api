@@ -23,6 +23,47 @@ class CategoryPaths
             )
         ]
     )]
+
+    #[OA\Get(
+        path: '/api/categories/{slug}',
+        summary: 'Get category by slug',
+        tags: ['Categories'],
+        parameters: [
+            new OA\Parameter(
+                name: 'slug',
+                in: 'path',
+                required: true,
+                description: 'Category slug',
+                schema: new OA\Schema(
+                    type: 'string',
+                    example: 'zdravie-a-lieky'
+                )
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Category detail',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/Category'
+                )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Category not found',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'message',
+                            type: 'string',
+                            example: 'Category not found.'
+                        )
+                    ]
+                )
+            )
+        ]
+    )]
+
     public function index(): void {}
 
     #[OA\Post(

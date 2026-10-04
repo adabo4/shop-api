@@ -34,9 +34,15 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug): JsonResponse
     {
-        //
+        $category = Category::with('children')->where('slug', $slug)->first();
+
+        if (!$category) {
+            return response()->json(['message' => 'Category not found.'], 404);
+        }
+
+        return response()->json($category);
     }
 
     /**
