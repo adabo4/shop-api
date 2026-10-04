@@ -132,5 +132,55 @@ class CategoryPaths
         ]
     )]
 
+    #[OA\Delete(
+        path: '/api/categories/{category}',
+        summary: 'Delete a category',
+        tags: ['Categories'],
+        parameters: [
+            new OA\Parameter(
+                name: 'category',
+                in: 'path',
+                required: true,
+                description: 'Category ID',
+                schema: new OA\Schema(
+                    type: 'integer',
+                    example: 3
+                )
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Category deleted successfully',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'message',
+                            type: 'string',
+                            example: 'Category deleted successfully.'
+                        )
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Category not found'
+            ),
+            new OA\Response(
+                response: 409,
+                description: 'Category has subcategories and cannot be deleted',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'message',
+                            type: 'string',
+                            example: 'Category cannot be deleted because it has subcategories.'
+                        )
+                    ]
+                )
+            )
+        ]
+    )]
+
     public function store(): void {}
 }

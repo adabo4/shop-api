@@ -118,6 +118,62 @@
             }
         },
         "/api/categories/{category}": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "operationId": "592e77f834b916c1d9124732aa17ff88",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 3
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category deleted successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    },
+                    "409": {
+                        "description": "Category has subcategories and cannot be deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category cannot be deleted because it has subcategories."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "patch": {
                 "tags": [
                     "Categories"

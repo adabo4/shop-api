@@ -60,8 +60,20 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category): JsonResponse
     {
-        //
+
+        if ($category->children()->exists()) {
+            return response()->json([
+                'message' => 'Category cannot be deleted because it has subcategories.'
+            ], 409);
+        }
+
+
+        $category->delete();
+
+        return response()->json([
+            'message' => 'Category deleted successfully.'
+        ]);
     }
 }
