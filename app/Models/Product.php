@@ -5,11 +5,11 @@ namespace App\Models;
 use App\Enums\ProductType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     protected $fillable = [
-        'product_code',
         'name',
         'slug',
         'ean',
@@ -34,5 +34,29 @@ class Product extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Product $product) {
+            $product->slug = Str::slug($product->name);
+        });
+
+        static::updating(function (Product $product) {
+            if ($product->isDirty('name')) {
+                $product->slug = Str::slug($product->name);
+            }
+        });
+
+        static::created(function (Product $product) {
+            $product->product_code = 'VIT-' . str_pad(
+                (string) $product->id,
+                6,
+                '0',
+                STR_PAD_LEFT
+            );
+
+            $product->saveQuietly();
+        });
     }
 }

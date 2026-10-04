@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\ProductType;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -15,9 +14,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Product::create([
-            'product_code' => 'VIT-000001',
             'name' => 'Testovací humánny liek',
-            'slug' => 'testovaci-humanny-liek',
             'ean' => '8580000000001',
             'sukl_code' => 'TEST001',
             'product_type' => ProductType::HUMAN_MEDICINE,
@@ -30,9 +27,9 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'product_code' => 'VIT-000002',
+
             'name' => 'Testovací výživový doplnok',
-            'slug' => 'testovaci-vyzivovy-doplnok',
+
             'ean' => '8580000000002',
             'sukl_code' => null,
             'product_type' => ProductType::FOOD_SUPPLEMENT,
@@ -45,9 +42,9 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'product_code' => 'VIT-000003',
+
             'name' => 'Testovacie náplasti',
-            'slug' => 'testovacie-naplasti',
+
             'ean' => '8580000000003',
             'sukl_code' => null,
             'product_type' => ProductType::OTHER,

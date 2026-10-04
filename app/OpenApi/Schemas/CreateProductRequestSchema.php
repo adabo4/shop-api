@@ -8,16 +8,10 @@ use OpenApi\Attributes as OA;
     schema: 'CreateProductRequest',
     type: 'object',
     required: [
-        'product_code',
         'name',
         'product_type',
     ],
     properties: [
-        new OA\Property(
-            property: 'product_code',
-            type: 'string',
-            example: 'VIT-000003'
-        ),
         new OA\Property(
             property: 'name',
             type: 'string',

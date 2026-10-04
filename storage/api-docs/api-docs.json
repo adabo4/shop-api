@@ -168,15 +168,10 @@
         "schemas": {
             "CreateProductRequest": {
                 "required": [
-                    "product_code",
                     "name",
                     "product_type"
                 ],
                 "properties": {
-                    "product_code": {
-                        "type": "string",
-                        "example": "VIT-000003"
-                    },
                     "name": {
                         "type": "string",
                         "example": "Paralen 500"
