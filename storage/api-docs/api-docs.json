@@ -115,6 +115,53 @@
                     }
                 }
             }
+        },
+        "/api/products/{product}": {
+            "patch": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update a product",
+                "operationId": "92f42922ff2fad70bc697bb9b4e46c6c",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -214,6 +261,56 @@
                     "product_type": {
                         "type": "string",
                         "example": "food_supplement"
+                    },
+                    "is_active": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "composition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "dosage": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "usage": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "warnings": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProductRequest": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Paralen 500 mg"
+                    },
+                    "ean": {
+                        "type": "string",
+                        "example": "8584005310017",
+                        "nullable": true
+                    },
+                    "sukl_code": {
+                        "type": "string",
+                        "example": "12345",
+                        "nullable": true
+                    },
+                    "product_type": {
+                        "type": "string",
+                        "enum": [
+                            "human_medicine",
+                            "food_supplement"
+                        ]
                     },
                     "is_active": {
                         "type": "boolean",

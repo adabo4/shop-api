@@ -4,8 +4,6 @@ namespace App\OpenApi\Paths;
 
 use OpenApi\Attributes as OA;
 
-use function Laravel\Prompts\form;
-
 #[OA\Get(
     path: '/api/products',
     summary: 'Get all products',
@@ -87,4 +85,42 @@ use function Laravel\Prompts\form;
     ]
 
 )]
+
+#[OA\Patch(
+    path: '/api/products/{product}',
+    summary: 'Update a product',
+    tags: ['Products'],
+    parameters: [
+        new OA\Parameter(
+            name: 'product',
+            in: 'path',
+            required: true,
+            schema: new OA\Schema(type: 'integer')
+        ),
+    ],
+    requestBody: new OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            ref: '#/components/schemas/UpdateProductRequest'
+        )
+    ),
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'Product updated successfully',
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/Product'
+            )
+        ),
+        new OA\Response(
+            response: 404,
+            description: 'Product not found'
+        ),
+        new OA\Response(
+            response: 422,
+            description: 'Validation error'
+        ),
+    ]
+)]
+
 class ProductPaths {}
