@@ -7,11 +7,39 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000",
+            "url": "http://localhost:8000",
             "description": "Local development server"
         }
     ],
     "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new customer",
+                "description": "Create a new customer account and start an authenticated session.",
+                "operationId": "ce165eecd0f6b84d9c48bf46c394a083",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [
@@ -410,6 +438,50 @@
     },
     "components": {
         "schemas": {
+            "RegisterRequest": {
+                "title": "Register Request",
+                "description": "Data required to register a new customer.",
+                "required": [
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "example": "Test"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Vitalis"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "test@example.sk"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "0901234567",
+                        "nullable": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "writeOnly": true,
+                        "example": "MojeHeslo123"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "format": "password",
+                        "writeOnly": true,
+                        "example": "MojeHeslo123"
+                    }
+                },
+                "type": "object"
+            },
             "Category": {
                 "properties": {
                     "id": {
@@ -657,6 +729,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
         {
             "name": "Categories",
             "description": "Categories"

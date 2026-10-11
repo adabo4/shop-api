@@ -10,7 +10,7 @@ use OpenApi\Attributes as OA;
     description: 'REST API for Vitalis Shop'
 )]
 #[OA\Server(
-    url: 'http://127.0.0.1:8000',
+    url: 'http://localhost:8000',
     description: 'Local development server'
 )]
 class Documentation {}

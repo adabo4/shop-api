@@ -4,7 +4,12 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "dev:api": "php artisan serve --host=localhost --port=8000",
+        "swagger": "php artisan l5-swagger:generate",
+        "migrate": "php artisan migrate",
+        "routes": "php artisan route:list",
+        "cache:clear": "php artisan optimize:clear"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
