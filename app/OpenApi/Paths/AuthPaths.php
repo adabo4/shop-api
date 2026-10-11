@@ -41,10 +41,26 @@ use OpenApi\Attributes as OA;
         )
     ),
     responses: [
+
         new OA\Response(
             response: 200,
-            description: 'User logged in successfully'
+            description: 'User logged in successfully',
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: 'message',
+                        type: 'string',
+                        example: 'User logged in successfully.'
+                    ),
+                    new OA\Property(
+                        property: 'user',
+                        ref: '#/components/schemas/User'
+                    ),
+                ],
+                type: 'object'
+            )
         ),
+
         new OA\Response(
             response: 401,
             description: 'Invalid email or password'
@@ -55,5 +71,35 @@ use OpenApi\Attributes as OA;
         ),
     ]
 )]
+
+
+#[OA\Get(
+    path: '/api/auth/me',
+    summary: 'Get authenticated user',
+    description: 'Return the currently authenticated customer.',
+    tags: ['Auth'],
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'Authenticated user retrieved successfully',
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: 'user',
+                        ref: '#/components/schemas/User'
+                    ),
+                ],
+                type: 'object'
+            )
+        ),
+        new OA\Response(
+            response: 401,
+            description: 'Unauthenticated'
+        ),
+    ]
+)]
+
+
+
 
 class AuthPaths {}
