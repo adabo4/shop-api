@@ -100,6 +100,35 @@ use OpenApi\Attributes as OA;
 )]
 
 
+#[OA\Post(
+    path: '/api/auth/logout',
+    summary: 'Log out a customer',
+    description: 'Log out the authenticated customer and invalidate the current session.',
+    tags: ['Auth'],
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'User logged out successfully',
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: 'message',
+                        type: 'string',
+                        example: 'User logged out successfully.'
+                    ),
+                ],
+                type: 'object'
+            )
+        ),
+        new OA\Response(
+            response: 401,
+            description: 'Unauthenticated'
+        ),
+    ]
+)]
+
+
+
 
 
 class AuthPaths {}
