@@ -11,6 +11,7 @@
 
     <button onclick="register()">Registrovať</button>
     <button onclick="login()">Login</button>
+    <button onclick="me()">Me</button>
 
     <pre id="result"></pre>
 
@@ -96,6 +97,31 @@
                     status: response.status,
                     data
                 }, null, 2);
+            } catch (error) {
+                result.textContent = error.message;
+            }
+        }
+
+
+        async function me() {
+            const result = document.getElementById('result');
+
+            try {
+                const response = await fetch('/api/auth/me', {
+                    method: 'GET',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                result.textContent = JSON.stringify({
+                    status: response.status,
+                    data
+                }, null, 2);
+
             } catch (error) {
                 result.textContent = error.message;
             }
