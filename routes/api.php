@@ -15,6 +15,7 @@ Route::delete('products/{product}', [ProductController::class, 'destroy']);
 /* CATEGORY */
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PasswordResetController;
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{slug}', [CategoryController::class, 'show']);
@@ -30,3 +31,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
+
+Route::post(
+    '/auth/forgot-password',
+    [PasswordResetController::class, 'forgotPassword']
+)->middleware('throttle:5,1');
+
+Route::post(
+    '/auth/reset-password',
+    [PasswordResetController::class, 'resetPassword']
+)->middleware('throttle:5,1');

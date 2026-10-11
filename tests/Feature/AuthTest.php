@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 
 beforeEach(function () {
     $this->app['router']->pushMiddlewareToGroup(
@@ -184,4 +187,59 @@ it('completes the full authentication lifecycle', function () {
     $afterLogoutResponse = $this->getJson('/api/auth/me');
 
     $afterLogoutResponse->assertUnauthorized();
+});
+
+it('sends a password reset notification', function () {
+
+    Notification::fake();
+
+    $user = User::factory()->create();
+
+    $response = $this->postJson(
+        '/api/auth/forgot-password',
+        [
+            'email' => $user->email,
+        ]
+    );
+
+    $response->assertOk();
+
+    Notification::assertSentTo(
+        $user,
+        ResetPassword::class
+    );
+
+    $this->assertDatabaseHas('password_reset_tokens', [
+        'email' => $user->email,
+    ]);
+});
+
+it('resets a password using a valid token', function () {
+
+    $user = User::factory()->create([
+        'password' => Hash::make('OldPassword123!'),
+    ]);
+
+    $token = Password::createToken($user);
+
+    $response = $this->postJson('/api/auth/reset-password', [
+        'email' => $user->email,
+        'token' => $token,
+        'password' => 'NewPassword123!',
+        'password_confirmation' => 'NewPassword123!',
+    ]);
+
+    $response->assertOk()
+        ->assertJson([
+            'message' => 'Password has been reset successfully.',
+        ]);
+
+    $user->refresh();
+
+    expect(Hash::check('NewPassword123!', $user->password))->toBeTrue();
+    expect(Hash::check('OldPassword123!', $user->password))->toBeFalse();
+
+    $this->assertDatabaseMissing('password_reset_tokens', [
+        'email' => $user->email,
+    ]);
 });
