@@ -12,6 +12,7 @@
     <button onclick="register()">Registrovať</button>
     <button onclick="login()">Login</button>
     <button onclick="me()">Me</button>
+    <button onclick="logout()">Logout</button>
 
     <pre id="result"></pre>
 
@@ -112,6 +113,40 @@
                     credentials: 'same-origin',
                     headers: {
                         'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                result.textContent = JSON.stringify({
+                    status: response.status,
+                    data
+                }, null, 2);
+
+            } catch (error) {
+                result.textContent = error.message;
+            }
+        }
+
+        async function logout() {
+            const result = document.getElementById('result');
+
+            try {
+                const xsrfCookie = document.cookie
+                    .split('; ')
+                    .find(cookie => cookie.startsWith('XSRF-TOKEN='));
+
+                const xsrfToken = xsrfCookie ?
+                    decodeURIComponent(xsrfCookie.split('=')[1]) :
+                    '';
+
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-XSRF-TOKEN': xsrfToken
                     }
                 });
 
