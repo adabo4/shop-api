@@ -27,4 +27,33 @@ use OpenApi\Attributes as OA;
         ),
     ]
 )]
+
+
+#[OA\Post(
+    path: '/api/auth/login',
+    summary: 'Log in a customer',
+    description: 'Authenticate an existing customer using email and password.',
+    tags: ['Auth'],
+    requestBody: new OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            ref: '#/components/schemas/LoginRequest'
+        )
+    ),
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'User logged in successfully'
+        ),
+        new OA\Response(
+            response: 401,
+            description: 'Invalid email or password'
+        ),
+        new OA\Response(
+            response: 422,
+            description: 'Validation error'
+        ),
+    ]
+)]
+
 class AuthPaths {}
