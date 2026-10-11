@@ -69,6 +69,11 @@ use OpenApi\Attributes as OA;
             response: 422,
             description: 'Validation error'
         ),
+
+        new OA\Response(
+            response: 429,
+            description: 'Too many login attempts'
+        ),
     ]
 )]
 
