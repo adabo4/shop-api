@@ -18,8 +18,10 @@ class AuthController extends Controller
     public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create($request->validated());
+        $user->assignRole('customer');
 
         Auth::guard('web')->login($user);
+
 
         $request->session()->regenerate();
 
