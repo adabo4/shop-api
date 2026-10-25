@@ -62,6 +62,7 @@ use OpenApi\Attributes as OA;
     path: '/api/products',
     summary: 'Create product',
     tags: ['Products'],
+    security: [['sessionAuth' => []]],
 
     requestBody: new OA\RequestBody(
         required: true,
@@ -77,6 +78,14 @@ use OpenApi\Attributes as OA;
                 ref: '#/components/schemas/Product'
             )
         ),
+        new OA\Response(
+            response: 401,
+            description: 'Unauthenticated.'
+        ),
+        new OA\Response(
+            response: 403,
+            description: 'Forbidden. Insufficient permissions.'
+        ),
 
         new OA\Response(
             response: 422,
@@ -90,6 +99,7 @@ use OpenApi\Attributes as OA;
     path: '/api/products/{product}',
     summary: 'Update a product',
     tags: ['Products'],
+    security: [['sessionAuth' => []]],
     parameters: [
         new OA\Parameter(
             name: 'product',
@@ -113,6 +123,14 @@ use OpenApi\Attributes as OA;
             )
         ),
         new OA\Response(
+            response: 401,
+            description: 'Unauthenticated.'
+        ),
+        new OA\Response(
+            response: 403,
+            description: 'Forbidden. Insufficient permissions.'
+        ),
+        new OA\Response(
             response: 404,
             description: 'Product not found'
         ),
@@ -127,6 +145,7 @@ use OpenApi\Attributes as OA;
     path: '/api/products/{product}',
     summary: 'Delete product',
     tags: ['Products'],
+    security: [['sessionAuth' => []]],
     parameters: [
         new OA\Parameter(
             name: 'product',
@@ -146,6 +165,14 @@ use OpenApi\Attributes as OA;
             content: new OA\JsonContent(
                 ref: '#/components/schemas/DestroyProductResponse'
             )
+        ),
+        new OA\Response(
+            response: 401,
+            description: 'Unauthenticated.'
+        ),
+        new OA\Response(
+            response: 403,
+            description: 'Forbidden. Insufficient permissions.'
         ),
         new OA\Response(
             response: 404,

@@ -70,6 +70,7 @@ class CategoryPaths
         path: '/api/categories',
         summary: 'Create a category',
         tags: ['Categories'],
+        security: [['sessionAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
@@ -85,6 +86,14 @@ class CategoryPaths
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthenticated.'
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden. Insufficient permissions.'
+            ),
+            new OA\Response(
                 response: 422,
                 description: 'Validation error'
             )
@@ -95,6 +104,7 @@ class CategoryPaths
         path: '/api/categories/{category}',
         summary: 'Update a category',
         tags: ['Categories'],
+        security: [['sessionAuth' => []]],
         parameters: [
             new OA\Parameter(
                 name: 'category',
@@ -122,6 +132,14 @@ class CategoryPaths
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthenticated.'
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden. Insufficient permissions.'
+            ),
+            new OA\Response(
                 response: 404,
                 description: 'Category not found'
             ),
@@ -136,6 +154,7 @@ class CategoryPaths
         path: '/api/categories/{category}',
         summary: 'Delete a category',
         tags: ['Categories'],
+        security: [['sessionAuth' => []]],
         parameters: [
             new OA\Parameter(
                 name: 'category',
@@ -161,6 +180,14 @@ class CategoryPaths
                         )
                     ]
                 )
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Unauthenticated.'
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden. Insufficient permissions.'
             ),
             new OA\Response(
                 response: 404,

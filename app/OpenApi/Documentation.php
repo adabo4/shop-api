@@ -9,6 +9,15 @@ use OpenApi\Attributes as OA;
     title: 'Vitalis Shop API',
     description: 'REST API for Vitalis Shop'
 )]
+
+#[OA\SecurityScheme(
+    securityScheme: 'sessionAuth',
+    type: 'apiKey',
+    in: 'cookie',
+    name: 'laravel_session',
+    description: 'Laravel Sanctum session authentication using cookies.'
+)]
+
 #[OA\Server(
     url: 'http://localhost:8000',
     description: 'Local development server'
