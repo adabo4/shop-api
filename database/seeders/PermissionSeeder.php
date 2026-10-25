@@ -30,6 +30,15 @@ class PermissionSeeder extends Seeder
 
         $admin->syncPermissions($permissions);
 
+        $productManager = Role::findByName('product-manager', 'web');
+
+        $productManager->syncPermissions([
+            'products.create',
+            'products.update',
+            'products.delete',
+        ]);
+
+
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }
