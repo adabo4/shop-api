@@ -9,12 +9,15 @@ use Illuminate\Support\Str;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
+use Database\Seeders\RoleSeeder;
 
 beforeEach(function () {
     $this->app['router']->pushMiddlewareToGroup(
         'api',
         StartSession::class
     );
+
+    $this->seed(RoleSeeder::class);
 });
 
 it('registers a new customer successfully', function () {
